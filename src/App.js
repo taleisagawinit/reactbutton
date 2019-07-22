@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    count: 0,
+    plural: 's'
+  };
+    
+  update() {
+    this.setState((prevState, props) => {
+      if (this.state.count === 0) {
+        return { count: prevState.count + 1, plural: '' }
+      } else {
+        return { count: prevState.count + 1, plural: 's'}
+      }
+    });
+  }
+      
+  render() {
+    return (
+      <div className="App">
+        <button className="App-button" onClick={() => this.update()}>
+          <span>
+            {this.state.count} like{this.state.plural}
+          </span>
+        </button>
+      </div>
+    );
+  }
+    
 }
 
 export default App;
